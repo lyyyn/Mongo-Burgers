@@ -157,19 +157,110 @@ db.dropDatabase()
 // Bonus
 //recreate your burgers database and your burger collection
 //copy paste your insert burgers from above to reseed your database
+/*
+use burgers
+db.createCollection('burger')
+db.burger.insert([{
+meat:'beef',
+cheese: false,
+topping: ['ketchup','onions','pickles']},
+{
+meat:'chicken',
+cheese: true,
+topping: ['onion','worstershire sauce','french fries']},
+{
+meat:'turkey',
+cheese: true,
+topping: ['pickled beets','onions','hot fudge']},
+{
+meat:'ostrich',
+cheese: false,
+topping: ['sriracha','pickles','ramen']},
+{
+meat:'tofu',
+cheese: false,
+topping: ['capers','relish','hot fudge']},
+{
+meat:'emu',
+cheese: true,
+topping: ['ketchup','onions','french fries']},
+{
+meat:'buffalo',
+cheese: true,
+topping: ['ketchup','onions','mustard']},
+{
+meat:'elk',
+cheese: false,
+topping: ['ketchup','guacamole']},
+{
+meat:'beef',
+cheese: true,
+topping: ['olives','guacamole','french fries']},
+{
+meat:'beef',
+cheese: false,
+topping: ['ketchup','mustard','french fries']},
+{
+meat:'beef',
+cheese: true,
+topping: ['pickled beets','relish','kimchi']},
+{
+meat:'beef',
+cheese: false,
+topping: ['ketchup','onions','mushrooms']},
+])
+*/
 
-
-//
 // Change the name of the key cheese to 'pumpkinSpice'
-
+/*
+db.burger.updateMany({},
+    {$rename: { cheese:'pumpkinSpice' }})
+*/
 
 // find all the burgers with ketchup (or another topping you used at least once)
-
+/*
+db.burger.find({
+    topping: 'ketchup'
+}).pretty()
+*/
 
 // find all the burgers with pickles (or a topping you used more than once) and remove the pickles
-
+/*
+db.burger.updateMany({
+    topping: 'pickles'
+},{
+$pull: {topping: 'pickles'}
+})
+*/
 
 // add a topping of 'eggs' to all the beef burgers
+/*
+db.burger.updateMany({
+    meat: 'beef'
+},{
+$push: {topping: 'eggs'}
+})
+*/
+
 //note since this db is 'reset' there should be no veggie burgers, all beef burgers should still be intact
 
 //Add a price to each burger, start with $5.00 for each burger 
+/*
+db.burger.updateMany({},{
+$set: {price: 5}
+},
+{upsert: true})
+
+db.burger.updateMany({
+    meat: 'beef'
+},{
+$inc: {price: 2}
+},
+{upsert: true})
+
+db.burger.updateMany({
+    meat: 'emu'
+},{
+$mul: {price: 2}
+})
+*/
